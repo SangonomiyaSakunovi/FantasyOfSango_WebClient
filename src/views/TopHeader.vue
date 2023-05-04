@@ -6,16 +6,14 @@
             <headerButton text="角色"></headerButton>
         </div>
         <div class="right-user">
-            <div class="user-login">
-                <span>登录</span>
-                <img src="@/assets/user.png" alt="">
-            </div>
+            <LoginDialog></LoginDialog>
         </div>
     </div>
 </template>
 
 <script setup>
 import headerButton from '@/components/headerButton.vue';
+import LoginDialog from './LoginDialog.vue';
 
 </script>
 
@@ -44,33 +42,6 @@ import headerButton from '@/components/headerButton.vue';
 
             &:hover {
                 text-shadow: 0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff;
-            }
-        }
-    }
-    .right-user {
-        .user-login {
-            display: flex;
-            align-items: center;
-
-            height: 66px;
-            line-height: 66px;
-
-            cursor: pointer;
-
-            &:hover > span {
-                color: #fff;
-            }
-            span {
-                color: #ccc;
-                font-size: 17px;
-                font-weight: 320;
-                letter-spacing: 5px;
-            }
-            img {
-                width: 27px;
-                height: 27px;
-
-                margin-left: 17px;
             }
         }
     }
