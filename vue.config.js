@@ -5,15 +5,31 @@ const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 module.exports = defineConfig({
-  transpileDependencies: true,
-  configureWebpack: {
-    plugins: [
-      AutoImport({
-        resolvers: [ElementPlusResolver()],
-      }),
-      Components({
-        resolvers: [ElementPlusResolver()],
-      }),
-    ]
-  }
+	transpileDependencies: true,
+	configureWebpack: {
+		plugins: [
+			AutoImport({
+				resolvers: [ElementPlusResolver()],
+			}),
+			Components({
+				resolvers: [ElementPlusResolver()],
+			}),
+		]
+	},
+	chainWebpack: config => {
+		config.plugin('html').tap(args => {
+			args[0].title = "Fantasy Of Sango";
+			return args;
+		})
+	},
+	devServer: {
+		proxy: {
+			'/api': {
+				target: 'http://124.220.20.98',
+				pathRewrite: {
+					'^/api':''
+				}
+			},
+		}
+	}
 })
