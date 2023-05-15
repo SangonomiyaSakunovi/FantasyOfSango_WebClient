@@ -37,7 +37,7 @@
                             size="large"
                         />
                     </div>
-                    <div class="login-button">登录</div>
+                    <div class="login-button" @click="loginFunction">登录</div>
                 </div>
                 <div class="method-regist" v-show="isRegistMethod">
                     <div class="input-area">
@@ -70,7 +70,11 @@
 <script setup>
 import { computed, reactive, ref } from 'vue';
 
-import baseDialog from '@/components/base-dialog.vue'
+import baseDialog from '@/components/base-dialog.vue';
+import { reqLogin } from '@/api';
+import { useUserStore } from '@/store/user';
+
+const store = useUserStore();
 
 const chooseMethod = ref('login');
 const isLoginMethod = computed(()=>chooseMethod.value == 'login');
@@ -86,6 +90,17 @@ const registInput = reactive({
     nickName: undefined,
     password: undefined,
 });
+
+function loginFunction() {
+    reqLogin(loginInput.account, loginInput.password).then((respond)=>{
+        if (respond.status === 200 && respond.data.code === 200) {
+            store.userState = true;
+            store.userInfo.account = respond.data.data.account;
+            console.log(store.userInfo.account)
+            dialogShow.value = false;
+        }
+    })
+}
 
 </script>
 

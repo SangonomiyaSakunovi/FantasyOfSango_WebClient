@@ -6,7 +6,8 @@
             <headerButton text="角色"></headerButton>
         </div>
         <div class="right-user">
-            <LoginDialog></LoginDialog>
+            <LoginDialog v-if="!store.userState"></LoginDialog>
+            <UserPanel v-else></UserPanel>
         </div>
     </div>
 </template>
@@ -14,7 +15,10 @@
 <script setup>
 import headerButton from '@/components/headerButton.vue';
 import LoginDialog from './LoginDialog.vue';
+import UserPanel from './UserPanel.vue';
+import { useUserStore } from '@/store/user';
 
+const store = useUserStore();
 </script>
 
 <style scoped lang="less">
