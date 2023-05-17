@@ -23,7 +23,7 @@ const store = useUserStore();
 
 <style scoped lang="less">
 .top-header {
-    position: absolute;
+    position: fixed;
     top: 0;
 
     display: flex;
