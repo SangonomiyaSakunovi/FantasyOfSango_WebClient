@@ -13,17 +13,24 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+
 import headerButton from '@/components/headerButton.vue';
 import LoginDialog from './LoginDialog.vue';
 import UserPanel from './UserPanel.vue';
 import { useUserStore } from '@/store/user';
 
 const store = useUserStore();
+
+onMounted(()=>{
+    store.checkLogin();
+})
 </script>
 
 <style scoped lang="less">
 .top-header {
     position: fixed;
+    z-index: 10000;
     top: 0;
 
     display: flex;
